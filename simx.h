@@ -29,7 +29,8 @@
 
 
 #define SIMX_API_VERSION_MAJOR 0
-#define SIMX_API_VERSION_MINOR 1
+#define SIMX_API_VERSION_MINOR 0
+#define SIMX_API_VERSION_PATCH 0
 
 
 #define SIMX_ERROR_NONE 0
@@ -66,14 +67,16 @@ struct SIMXquaternion {
 typedef void (*simx_log_callback)(int level, const char* message, void* user_data);
 
 
-SIMX_API int simx_get_api_version(int* major, int* minor);
+SIMX_API int simx_set_log_callback(simx_log_callback callback, void* user_data);
+
+SIMX_API int simx_get_api_version_number(int* major, int* minor, int* patch);
+SIMX_API const char* simx_get_api_version();
 
 SIMX_API const char* simx_get_implementation_name();
 SIMX_API const char* simx_get_implementation_description();
 SIMX_API const char* simx_get_implementation_version();
 SIMX_API const char* simx_get_implementation_author();
 
-SIMX_API int simx_set_log_callback(simx_log_callback callback, void* user_data);
 SIMX_API const char* simx_get_error_message();
 
 SIMX_API int simx_get_interfaces(char** interfaces, int* length);
@@ -81,6 +84,7 @@ SIMX_API int simx_get_interfaces(char** interfaces, int* length);
 SIMX_API double simx_get_timestep();
 
 SIMX_API int simx_create_entity(struct SIMXentity** entity);
+SIMX_API int simx_set_entity_log_callback(struct SIMXentity* entity, simx_log_callback callback, void* user_data);
 SIMX_API int simx_step_entity(struct SIMXentity* entity, double time);
 SIMX_API void simx_destroy_entity(struct SIMXentity* entity);
 
