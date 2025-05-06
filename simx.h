@@ -294,6 +294,15 @@ SIMX_API int simx_step_entity(struct SIMXentity* entity);
 /// @param[in] entity The entity to destroy.
 SIMX_API void simx_destroy_entity(struct SIMXentity* entity);
 
+/// @ingroup entity
+/// @brief Get the amount of logical time that an entity has simulated.
+/// @param[in] entity The entity for which to get the logical time.
+/// @param[out] time The amount of logical time that @p entity has simulated.
+/// @return 
+/// - If @p entity or @p time is @c NULL returns #SIMX_ERROR_ARGUMENT_NULL.
+/// - Else returns #SIMX_ERROR_NONE.
+SIMX_API int simx_get_time(const struct SIMXentity* entity, double* time);
+
 /// @brief Get the amount of logical time that elapses during each entity
 /// timestep.
 /// @return Delta time in seconds.
