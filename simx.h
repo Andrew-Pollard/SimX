@@ -296,23 +296,44 @@ SIMX_API void simx_destroy_entity(struct SIMXentity* entity);
 
 /// @ingroup entity
 /// @brief Get the amount of logical time that an entity has simulated.
+/// @remarks Not all entities are guaranteed to use a fixed timestep - use this
+/// function directly rather than performing calculations using @ref
+/// simx_get_entity_timestep() and @ref simx_get_entity_iteration().
 /// @param[in] entity The entity for which to get the logical time.
 /// @param[out] time The amount of logical time that @p entity has simulated
 /// in seconds.
+/// @sa simx_step_entity()
 /// @return 
 /// - If @p entity or @p time is @c NULL returns #SIMX_ERROR_ARGUMENT_NULL.
 /// - Else returns #SIMX_ERROR_NONE.
-SIMX_API int simx_get_time(const struct SIMXentity* entity, double* time);
+SIMX_API int simx_get_entity_time(const struct SIMXentity* entity, double* time);
 
 /// @ingroup entity
 /// @brief Get the amount of logical time that elapses during an entity
 /// timestep.
+/// @remarks Not all entities are guaranteed to use a fixed timestep - use this
+/// function directly rather than performing calculations using @ref
+/// simx_get_entity_time() and @ref simx_get_entity_iteration().
 /// @param[in] entity The entity for which to get the logical timestep.
 /// @param[out] timestep Delta time in seconds.
+/// @sa simx_step_entity()
 /// @return 
 /// - If @p entity or @p timestep is @c NULL returns #SIMX_ERROR_ARGUMENT_NULL.
 /// - Else returns #SIMX_ERROR_NONE.
-SIMX_API int simx_get_timestep(const struct SIMXentity* entity, double* timestep);
+SIMX_API int simx_get_entity_timestep(const struct SIMXentity* entity, double* timestep);
+
+/// @ingroup entity
+/// @brief Get the number of timesteps that an entity has simulated.
+/// @remarks Not all entities are guaranteed to use a fixed timestep - use this
+/// function directly rather than performing calculations using @ref
+/// simx_get_entity_time() and @ref simx_get_entity_timestep().
+/// @param[in] entity The entity for which to get the number of iterations.
+/// @param[out] time The number of iterations that @p entity has simulated.
+/// @sa simx_step_entity()
+/// @return 
+/// - If @p entity or @p iteration is @c NULL returns #SIMX_ERROR_ARGUMENT_NULL.
+/// - Else returns #SIMX_ERROR_NONE.
+SIMX_API int simx_get_entity_iteration(const struct SIMXentity* entity, long long* iteration);
 
 
 #endif /* SIMX_H */
