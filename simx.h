@@ -207,15 +207,14 @@ SIMX_API const char* simx_get_implementation_version();
 SIMX_API const char* simx_get_implementation_author();
 
 /// @brief Get the extension interfaces this implementation supports.
-/// @todo Rename to @c simx_get_extensions().
-/// @param[out] interfaces A list of supported extension identifiers as
+/// @param[out] extensions A list of supported extension identifiers as
 /// null-terminated UTF-8 strings.
 /// @param[out] length The length of @p interfaces.
 /// @return
-/// - If @p interfaces or @p length is @c NULL returns
+/// - If @p extensions or @p length is @c NULL returns
 ///   #SIMX_ERROR_ARGUMENT_NULL.
 /// - Else returns #SIMX_ERROR_NONE.
-SIMX_API int simx_get_interfaces(char** interfaces, int* length);
+SIMX_API int simx_get_extensions(char** extensions, int* length);
 
 /// @}
 
