@@ -43,12 +43,19 @@
 /// implemented.
 /// @{
 
-/// @brief The major version of the API.
+/// @brief The major version number of the <a href=https://semver.org/>Semantic
+/// Version</a> of the API.
 #define SIMX_API_VERSION_MAJOR 0
-/// @brief The minor version of the API.
+/// @brief The minor version number of the <a href=https://semver.org/>Semantic
+/// Version</a> of the API.
 #define SIMX_API_VERSION_MINOR 0
-/// @brief The patch version of the API.
+/// @brief The patch version number of the <a href=https://semver.org/>Semantic
+/// Version</a> of the API.
 #define SIMX_API_VERSION_PATCH 0
+
+/// @brief The <a href=https://semver.org/>Semantic Version</a> of the API
+/// including any additional labels.
+#define SIMX_API_VERSION "0.0.0"
 
 /// @}
 
