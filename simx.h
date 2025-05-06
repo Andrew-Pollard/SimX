@@ -280,13 +280,11 @@ SIMX_API int simx_create_entity(struct SIMXentity** entity);
 
 /// @ingroup entity
 /// @brief Advance an entity by one timestep.
-/// @todo Remove @p time.
 /// @param[in] entity The entity to advance.
-/// @param[in] time 
 /// @return 
 /// - If @p entity is @c NULL returns #SIMX_ERROR_ARGUMENT_NULL.
 /// - Else returns #SIMX_ERROR_NONE.
-SIMX_API int simx_step_entity(struct SIMXentity* entity, double time);
+SIMX_API int simx_step_entity(struct SIMXentity* entity);
 
 /// @ingroup entity
 /// @brief Destroy an entity.
