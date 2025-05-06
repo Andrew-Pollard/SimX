@@ -48,7 +48,7 @@ const char* simx_get_api_version();
 
 ## Tasks
 - [X] Create a README.
-- [ ] Add [Doxygen](https://www.doxygen.nl/) comments.
+- [X] Add [Doxygen](https://www.doxygen.nl/) comments.
 - [ ] Create a reference implementation.
     - [ ] Set up git submodules.
     - [ ] Set up cmake.

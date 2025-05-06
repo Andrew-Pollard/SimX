@@ -49,12 +49,14 @@
 #define SIMX_API_VERSION_MINOR 0
 /// @brief The patch version of the API.
 #define SIMX_API_VERSION_PATCH 0
+
 /// @}
 
 
 /// @defgroup error Errors
 /// @brief How to determine if an operation has succeeded or failed.
 /// @{
+
 /// @defgroup error_code Error Codes
 /// @brief The different categories of error that can occur in SimX.
 /// @{
@@ -71,6 +73,7 @@
 #define SIMX_ERROR_ARGUMENT_OUT_OF_RANGE 3
 /// @brief The function failed to allocate the required memory.
 #define SIMX_ERROR_INSUFFICIENT_MEMORY 4
+
 /// @}
 /// @}
 
@@ -79,6 +82,7 @@
 /// @brief How to trace the flow of execution in a SimX implementation and
 /// monitor events the occur.
 /// @{
+
 /// @defgroup log_level Log Levels
 /// @brief The different levels of log message severity.
 /// @{
@@ -95,6 +99,7 @@
 #define SIMX_LOG_LEVEL_ERROR 4
 /// @brief A fatal event that cannot be recovered from.
 #define SIMX_LOG_LEVEL_FATAL 5
+
 /// @}
 /// @}
 
@@ -107,10 +112,16 @@
 /// @brief An instance of a model entity.
 /// 
 /// This structure is deliberately opaque for the purposes of data hiding /
-/// encapsulation. To interact with an entity use @ref entity "entity" functions.
+/// encapsulation. To interact with an entity use @ref entity "entity"
+/// functions.
 struct SIMXentity;
+
 /// @}
 
+
+/// @defgroup common_data_structures Common Data Structures
+/// @brief Data structures likely to be used by many extensions.
+/// @{
 
 /// @brief A Cartesian vector composed of three double precision components.
 struct SIMXvector3 {
@@ -121,7 +132,6 @@ struct SIMXvector3 {
     /// @brief The z component.
     double z;
 };
-
 
 /// @brief A quaternion composed of four double precision components.
 struct SIMXquaternion {
@@ -135,6 +145,8 @@ struct SIMXquaternion {
     double w;
 };
 
+/// @}
+
 
 /// @ingroup version
 /// @brief Get the <a href=https://semver.org/>Semantic Version</a> number of
@@ -143,7 +155,8 @@ struct SIMXquaternion {
 /// @param[out] minor The minor version of the API.
 /// @param[out] patch The patch version of the API.
 /// @return
-/// - If @p major, @p minor or @p patch is @c NULL returns #SIMX_ERROR_ARGUMENT_NULL.
+/// - If @p major, @p minor or @p patch is @c NULL returns
+///   #SIMX_ERROR_ARGUMENT_NULL.
 /// - Else returns #SIMX_ERROR_NONE.
 SIMX_API int simx_get_api_version_number(int* major, int* minor, int* patch);
 
@@ -154,16 +167,56 @@ SIMX_API int simx_get_api_version_number(int* major, int* minor, int* patch);
 /// @return The version of the API as a null-terminated UTF-8 string.
 SIMX_API const char* simx_get_api_version();
 
+
 /// @defgroup meta Metadata
-/// @brief How to get a description of the implementation and the extensions it supports.
+/// @brief How to get a description of the implementation and the extensions it
+/// supports.
 /// @{
 
+/// @brief Get the name of the implementation.
+///
+/// This should be a human-readable "friendly name" suitable for showing to a
+/// non-expert user.
+/// @return The name of the implementation as a null-terminated UTF-8 string.
 SIMX_API const char* simx_get_implementation_name();
+
+/// @brief Get a description of the implementation.
+///
+/// This should be a brief human-readable description of the implementation.
+/// @note The description should be unformatted (no control characters, HTML,
+/// Markdown etc.).
+/// @return A description of the implementation as a null-terminated UTF-8
+/// string.
 SIMX_API const char* simx_get_implementation_description();
+
+/// @brief Get the version of the implementation.
+///
+/// The format of the version information is implementation-dependent but
+/// <a href=https://semver.org/>Semantic Versioning</a> is encouraged.
+/// @warning As the version information does not have a fixed format it should
+/// only be used for informational purposes.
+/// @return The version of the implementation as a null-terminated UTF-8 string.
 SIMX_API const char* simx_get_implementation_version();
+
+/// @brief Get the author(s) of the implementation.
+///
+/// The format of the author information is implementation-dependent but should
+/// be sufficient for users to make contact.
+/// @return The author(s) of the implementation as a null-terminated UTF-8
+/// string.
 SIMX_API const char* simx_get_implementation_author();
 
+/// @brief Get the extension interfaces this implementation supports.
+/// @todo Rename to @c simx_get_extensions().
+/// @param[out] interfaces A list of supported extension identifiers as
+/// null-terminated UTF-8 strings.
+/// @param[out] length The length of @p interfaces.
+/// @return
+/// - If @p interfaces or @p length is @c NULL returns
+///   #SIMX_ERROR_ARGUMENT_NULL.
+/// - Else returns #SIMX_ERROR_NONE.
 SIMX_API int simx_get_interfaces(char** interfaces, int* length);
+
 /// @}
 
 
@@ -220,7 +273,8 @@ SIMX_API int simx_set_entity_log_callback(struct SIMXentity* entity, simx_log_ca
 /// @param[out] entity The newly created entity.
 /// @return
 /// - If @p entity is @c NULL returns #SIMX_ERROR_ARGUMENT_NULL.
-/// - If a new entity cannot be allocated returns #SIMX_ERROR_INSUFFICIENT_MEMORY.
+/// - If a new entity cannot be allocated returns
+///   #SIMX_ERROR_INSUFFICIENT_MEMORY.
 /// - Else returns #SIMX_ERROR_NONE.
 SIMX_API int simx_create_entity(struct SIMXentity** entity);
 
@@ -242,7 +296,6 @@ SIMX_API int simx_step_entity(struct SIMXentity* entity, double time);
 /// @param[in] entity The entity to destroy.
 SIMX_API void simx_destroy_entity(struct SIMXentity* entity);
 
-/// @ingroup entity
 /// @brief Get the amount of logical time that elapses during each entity
 /// timestep.
 /// @return Delta time in seconds.
