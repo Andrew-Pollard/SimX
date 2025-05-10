@@ -2,17 +2,18 @@ name: Build Doxygen Documentation
 on: push
 
 jobs:
-  install-doxygen:
+  docummentation:
     runs-on: ubuntu-latest
     steps:
-      - name: Install Doxygen
+      - name: Install Graphviz and Doxygen
         run: |
           sudo apt-add-repository universe
           sudo apt-get update
+          sudo apt-get install graphviz
           sudo apt-get install doxygen
 
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Run Doxygen
+      - name: Generate documentation
         run: doxygen Doxyfile
