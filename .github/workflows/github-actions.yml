@@ -2,18 +2,29 @@ name: Build Doxygen Documentation
 on: push
 
 jobs:
-  docummentation:
+  documentation:
     runs-on: ubuntu-latest
     steps:
       - name: Install Graphviz and Doxygen
         run: |
           sudo apt-add-repository universe
           sudo apt-get update
-          sudo apt-get install graphviz
-          sudo apt-get install doxygen
+          sudo apt-get install graphviz doxygen
 
-      - name: Check out repository
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Generate documentation
         run: doxygen Doxyfile
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './doc/html'
+
+      - name: Deploy Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
