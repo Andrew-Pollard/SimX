@@ -11,13 +11,8 @@ jobs:
           sudo apt-get update
           sudo apt-get install doxygen
 
-      - name: Generate Doxyfile
-        run: |
-          doxygen -g Doxyfile
-          cat Doxyfile
+      - name: Check out repository
+        uses: actions/checkout@v4
 
-#      - name: Check out repository
-#        uses: actions/checkout@v4
-
-#      - name: Run Doxygen
-#        run: doxygen Doxyfile
+      - name: Run Doxygen
+        run: doxygen Doxyfile
