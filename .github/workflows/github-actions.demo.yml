@@ -1,8 +1,12 @@
-name: Ping Test
-run-name: Ping Test
-on: [push]
+name: Build Doxygen Documentation
+on: push
+
 jobs:
-  Ping-Test:
+  install-doxygen:
     runs-on: ubuntu-latest
     steps:
-      - run: ping 8.8.8.8
+      - name: Install Doxygen
+        run: |
+          sudo apt-add-repository universe
+          sudo apt-get update
+          sudo apt-get install doxygen
