@@ -46,6 +46,10 @@ const char* simx_get_api_version();
 > implementation.
 
 
+## Documentation
+API reference is available on [GitHub Pages](https://andrew-pollard.github.io/SimX/).
+
+
 ## Tasks
 - [X] Create a README.
 - [X] Add [Doxygen](https://www.doxygen.nl/) comments.
